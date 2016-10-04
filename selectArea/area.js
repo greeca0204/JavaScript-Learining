@@ -1,12 +1,3 @@
-/*
-*	全国三级城市联动 js版
-*	author:		mrasong
-*   download:   http://www.codefans.net
-*	homepage:	http://asong.us/
-*	E-mail:		mrasong#163.com
-*	version:	1.0.2
-*	data:		tencent
-**/
 function Dsy(){
 	this.Items = {};
 }
