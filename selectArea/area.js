@@ -415,5 +415,5 @@ function _init_area(){  //³õÊ¼»¯º¯Êý
 	for(i=0;i<s.length-1;i++){
 	  document.getElementById(s[i]).onchange=new Function("change("+(i+1)+")");
 	}
-	change(0);
+	change(0);123
 }
