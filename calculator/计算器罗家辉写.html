@@ -1,0 +1,333 @@
+<html>
+ <head>
+  <title>计算器--罗家辉</title>
+  <script>
+	var point = 0;
+	var calFlag;
+	var op1;
+	
+	function Clearall(){
+	  op1=0;
+	  document.cal.opNum.value=0;
+	}
+	function Mathsqrt(){
+	  op1=document.cal.opNum.value;
+	  document.cal.opNum.value= Math.sqrt(parseFloat(op1));
+	}
+	function Sign(){
+	  op1=document.cal.opNum.value;
+	  document.cal.opNum.value=parseFloat(op1)*(-1); 
+	}
+	function CheckSign(n){
+		switch(n){
+		  case '+' : 
+			  op1 = document.cal.opNum.value; 
+			  document.cal.opNum.value = ""; 
+			  calFlag = 1; 
+			  point=0;
+			  break;
+		  case '-' :
+			  op1 = document.cal.opNum.value; 
+			  document.cal.opNum.value = ""; 
+			  calFlag = 2; 
+			  point=0;
+			  break;
+		  case '*' :
+			  op1 = document.cal.opNum.value; 
+			  document.cal.opNum.value = ""; 
+			  calFlag = 3; 
+			  point=0;
+			  break;
+		  case '/' : 
+			  op1 = document.cal.opNum.value; 
+			  document.cal.opNum.value = ""; 
+			  calFlag = 4; 
+			  point=0;
+			  break;
+		  case '%' : 
+			  op1 = document.cal.opNum.value; 
+			  document.cal.opNum.value = ""; 
+			  calFlag = 5; 
+			  point=0;
+			  break; 
+		case '^' : 
+			  op1 = document.cal.opNum.value; 
+			  document.cal.opNum.value = ""; 
+			  calFlag = 6; 
+			  point=0;
+			  break;
+		case 's' : 
+			  op1 = document.cal.opNum.value; 
+			  document.cal.opNum.value = ""; 
+			  calFlag = 7; 
+			  point=0;
+			  break;
+		  case '=' : 
+			  if(calFlag == 1){
+			  	sum = parseFloat(document.cal.opNum.value) + parseFloat(op1); 
+			  	document.cal.opNum.value = sum;
+			  	break;
+			  }
+			  else if(calFlag == 2){
+			  	sum = parseFloat(op1) - parseFloat(document.cal.opNum.value); 
+			  	document.cal.opNum.value = sum;
+			  	break;
+			  }
+			  else if(calFlag == 3){
+			  	sum = parseFloat(document.cal.opNum.value) * parseFloat(op1); 
+			  	document.cal.opNum.value = sum;
+			  	break;
+			  }
+			  else if(calFlag == 4){
+			  	if(document.cal.opNum.value!=0){
+			  		sum = parseFloat(op1) / parseFloat(document.cal.opNum.value); 
+			  		document.cal.opNum.value = sum;
+			  	}
+			  	else{
+			  		document.cal.opNum.value = "0不能作除数";			
+			  	}
+			  	break;
+		      }
+			  else if(calFlag == 5){
+			  	sum = parseInt(op1) % parseInt(document.cal.opNum.value); 
+			  	document.cal.opNum.value = sum;
+			  	break;
+			  }
+			  else if(calFlag == 6){
+			  	sum = Math.pow(parseFloat(op1),parseFloat(document.cal.opNum.value)); 
+			  	document.cal.opNum.value = sum;
+			  	break;
+			  }
+			  else if(calFlag == 7){
+			  var val=parseFloat(document.cal.opNum.value);
+				if(val!=0){
+			  	sum = Math.pow(parseFloat(op1),1/val); 
+			  	document.cal.opNum.value = sum;
+				}
+				else{
+				document.cal.opNum.value = "开方次数不能为0！";
+				}
+			  	break;
+			  }	
+			  else{break;}
+			  default  : break;
+		}	
+	}
+    function CheckNumber(n){
+	  var cal=document.cal.opNum.value;
+	  if(cal=="0") {
+	    if(n!="."){
+		  document.cal.opNum.value= n;
+	      }
+	    else{ 
+		  document.cal.opNum.value=document.cal.opNum.value+ n;
+		  point=1;
+	      }		
+	  }
+	  else{
+		switch(n){
+		  case '1' : document.cal.opNum.value = document.cal.opNum.value + n; break;
+		  case '2' : document.cal.opNum.value = document.cal.opNum.value + n; break;
+		  case '3' : document.cal.opNum.value = document.cal.opNum.value + n; break;
+		  case '4' : document.cal.opNum.value = document.cal.opNum.value + n; break;
+		  case '5' : document.cal.opNum.value = document.cal.opNum.value + n; break;
+		  case '6' : document.cal.opNum.value = document.cal.opNum.value + n; break;
+		  case '7' : document.cal.opNum.value = document.cal.opNum.value + n; break;
+		  case '8' : document.cal.opNum.value = document.cal.opNum.value + n; break;
+		  case '9' : document.cal.opNum.value = document.cal.opNum.value + n; break;
+		  case '0' : document.cal.opNum.value = document.cal.opNum.value + n; break;
+		  case '.' : 
+		 	  if(point == 0){
+			 		document.cal.opNum.value = document.cal.opNum.value + n;
+			  		point=1;
+					break;
+			  }
+			  else{
+				  point = point +1; 
+			  	  break;
+			  }
+		  default  : break;
+		}
+	  }
+    }
+	function Sin(){
+	  op1=document.cal.opNum.value;
+	  document.cal.opNum.value= Math.sin(parseFloat(op1));
+	}
+	function Cos(){
+	  op1=document.cal.opNum.value;
+	  document.cal.opNum.value= Math.cos(parseFloat(op1));
+	}
+	function Tan(){
+	  op1=document.cal.opNum.value;
+	  document.cal.opNum.value= Math.tan(parseFloat(op1));
+	}
+	function Asin(){
+	  op1=document.cal.opNum.value;
+	  document.cal.opNum.value= Math.asin(parseFloat(op1));
+	}
+	function Acos(){
+	  op1=document.cal.opNum.value;
+	  document.cal.opNum.value= Math.acos(parseFloat(op1));
+	}
+	function Atan(){
+	  op1=document.cal.opNum.value;
+	  document.cal.opNum.value= Math.atan(parseFloat(op1));
+	}
+	function Log(){
+	  op1=document.cal.opNum.value;
+	  document.cal.opNum.value= Math.log(parseFloat(op1));
+	}
+	function Ln(){
+	  op1=parseInt(document.cal.opNum.value);
+	  document.cal.opNum.value= Math.log(op1);
+	}
+	function jiecheng(){
+	  op1=parseInt(document.cal.opNum.value);
+	  var s=1;
+	  for(var i=1;i<=op1;i++){
+         s=s*i;
+       }
+	  document.cal.opNum.value=s;  
+	}
+	function ercifang(){
+	  op1=document.cal.opNum.value;
+	  document.cal.opNum.value= Math.pow(parseFloat(op1),2);
+	}
+	function sancifang(){
+	  op1=document.cal.opNum.value;
+	  document.cal.opNum.value= Math.pow(parseFloat(op1),3);
+	}
+	function fenshi(){
+	  op1=document.cal.opNum.value;
+	  if(op1!=0){
+	  document.cal.opNum.value=1/op1;
+	  }
+	  else{
+	  document.cal.opNum.value="0不能做分母！";  
+	  }
+	}
+	function PI(){
+	  document.cal.opNum.value=Math.PI;
+	}
+	function RAND(){
+	  document.cal.opNum.value= Math.random();	
+	}
+	function exp(){
+	  op1=document.cal.opNum.value;
+	  document.cal.opNum.value= Math.exp(parseFloat(op1));	
+	}
+	function left(){
+	  document.cal.opNum.value = "(";
+	}
+	function right(){
+	  document.cal.opNum.value = ")";
+	}
+	function RAD(){
+	  op1=document.cal.opNum.value;
+	  document.cal.opNum.value= op1*180;	
+	}
+	function nd(){
+	  op1=document.cal.opNum.value;
+	  if(op1!=0){
+	  document.cal.opNum.value= 180/op1;}
+	  else{
+	  document.cal.opNum.value= "角度不能为0！";
+	  }
+	}	
+	function EE(){
+	  document.cal.opNum.value = Math.E;
+	}
+	  function time(){
+		var today = new Date();
+		var weeks = new Array("星期天","星期一","星期二","星期三","星期四","星期五","星期六");
+		var year = today.getYear();
+		var month = today.getMonth()+1;
+		var date = today.getDate();
+		var hours = today.getHours();
+		var minutes = today.getMinutes();
+		var seconds = today.getSeconds();
+		minutes = minutes<10?"0"+minutes:minutes;
+		seconds = seconds<10?"0"+seconds:seconds;
+		var day = today.getDay();
+		var ampm = hours<12?"AM":"PM";
+		alert("现在的时间是"+year+"年"+month+"月"+date+"号，"+weeks[day]+"，"+hours+"点"+minutes+"分"+seconds+"秒"+ampm);
+	}
+  </script>
+ </head>
+ <body bgcolor="#0099CC">
+  <h1 align="center">我的计算器：</h1>
+   <table align="center" border="2">
+      <form name="cal">
+       <tr>
+	    <td colspan="4"><input type="text" name="opNum" value="0" style="text-align:right" size=25><td>
+       </tr>
+       <tr>
+	    <td><input type="button" name="num1" value=" 1  " onclick = "CheckNumber('1')"></td>
+	    <td><input type="button" name="num2" value=" 2  " onclick = "CheckNumber('2')"></td>
+	    <td><input type="button" name="num3" value=" 3  " onclick = "CheckNumber('3')"></td>
+	    <td><input type="button" name="add" value=" +  " onclick = "CheckSign('+')"></td>
+       </tr>
+       <tr>         
+	    <td><input type="button" name="num4" value=" 4  " onclick = "CheckNumber('4')"></td>
+	    <td><input type="button" name="num5" value=" 5  " onclick = "CheckNumber('5')"></td>
+	    <td><input type="button" name="num6" value=" 6  " onclick = "CheckNumber('6')"></td>
+	    <td><input type="button" name="sub" value=" -  " onclick = "CheckSign('-')"></td>
+      </tr>
+      <tr>
+	    <td><input type="button" name="num7" value=" 7  " onclick = "CheckNumber('7')"></td>
+	    <td><input type="button" name="num8" value=" 8  " onclick = "CheckNumber('8')"></td>
+	    <td><input type="button" name="num9" value=" 9  " onclick = "CheckNumber('9')"></td>
+	    <td><input type="button" name="mul" value=" *  " onclick = "CheckSign('*')"></td>
+       </tr>
+       <tr>
+	    <td><input type="button" name="num0" value=" 0  " onclick = "CheckNumber('0')"></td>
+	    <td><input type="button" name="numsPoint" value=" .  " onclick = "CheckNumber('.')"></td>
+	    <td><input type="button" value="+/- " onclick = "Sign()"></td>	       
+	    <td><input type="button" name="div" value=" /  " onclick = "CheckSign('/')"></td>
+       </tr>
+       <tr>
+	    <td><input type="button" name="C" value=" C  " onClick="Clearall();"></td>
+	    <td><input type="button" name="equ" value=" =  " onclick = "CheckSign('=')"></td>
+	    <td><input type="button" value=" √ " onclick = "Mathsqrt()"></td>
+	    <td><input type="button" name="mod" value="  % " onclick = "CheckSign('%')"></td>
+       </tr>
+       <tr>
+	    <td><input type="button" value="sin " onClick="Sin()"></td>
+	    <td><input type="button" value="cos " onclick ="Cos()"></td>
+	    <td><input type="button" value="tan " onclick = "Tan()"></td>
+	    <td><input type="button" value="hSin" onclick = "Asin()"></td>
+       </tr>
+       <tr>
+	    <td><input type="button" value="hCos" onClick="Acos();"></td>
+	    <td><input type="button" value="hTan" onclick = "Atan()"></td>
+	    <td><input type="button" value="log " onclick = "Log()"></td>
+	    <td><input type="button" value=" x! " onclick = "jiecheng()"></td>
+       </tr>	
+       <tr>
+	    <td><input type="button" value=" X2 " onClick="ercifang();"></td>
+	    <td><input type="button" value=" X3 " onclick = "sancifang()"></td>
+	    <td><input type="button" value=" 1/X" onclick = "fenshi()"></td>
+	    <td><input type="button" value="    π   " onclick = "PI()"></td>
+       </tr>
+       <tr>
+	    <td><input type="button" value=" ln " onClick="Ln();"></td>
+	    <td><input type="button" value="Rand" onclick = "RAND()"></td>
+	    <td><input type="button" value=" exp" onclick = "exp()"></td>
+	    <td><input type="button" name="^" value="x^y " onclick = "CheckSign('^')"></td>
+       </tr>
+       <tr>
+	    <td><input type="button" value="x√y" onClick="CheckSign('s');"></td>
+	    <td><input type="button" value=" (  " onclick = "left()"></td>
+	    <td><input type="button" value="  ) " onclick = "right()"></td>
+	    <td><input type="button" name="^" value="RAD " onclick = "RAD()"></td>
+       </tr>
+       <tr>
+	    <td colspan="2"><input type="button" value="   time  " onclick="time()"></td>
+	    <td><input type="button" value=" EE " onclick = "EE()"></td>
+	    <td><input type="button" name="^" value="2nd " onclick = "nd()"></td>
+       </tr>	   
+      </form>
+   </table>
+  </body>
+</html>

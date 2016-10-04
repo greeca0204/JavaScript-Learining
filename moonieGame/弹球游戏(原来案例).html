@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script language="javascript">
+	var begin = false;//球是否开始运动
+	var left = "a";//左
+	var right = "d";//右
+	var Go = "b";//发球
+	var Agility = 10;//挡板移动敏捷
+	var Rapidity = 5;//弹珠速度
+	var length = 194;//挡扳长度
+	function begin()//配置游戏按键功能
+	{
+		document.getElementById("shiZhe").style.display == "block"
+	}
+	function arranged()
+	{
+		left = document.getElementById("txtLeft").value;
+		right = document.getElementById("txtRight").value;
+		Go = document.getElementById("txtGo").value;
+		Agility = parseInt(document.getElementById("txtAgility").value);
+		Rapidity = parseInt(document.getElementById("txtRapidity").value);
+		length = parseInt(document.getElementById("txtLength").value);
+		if(left.length == 0 || right.length == 0 || Go.length == 0 || !(Agility>=0) || !(Rapidity>=0) || !(length>=0))
+		{
+			alert("请填写完整游戏设置!");
+			return;
+		}
+		document.getElementById("pix").style.width = length;
+		document.getElementById("ball").style.pixelLeft = document.getElementById("baffle").style.pixelLeft+(length/2)-20;
+		document.getElementById("shiZhe").style.display = "none"
+		move();
+	}
+
+	function move()//板块的移动
+	{
+		if(document.getElementById("shiZhe").style.display == "none")
+		{
+			switch(String.fromCharCode(event.keyCode))
+			{
+				case left:
+					if(document.getElementById("baffle").style.pixelLeft>=0)
+					{
+						document.getElementById("baffle").style.pixelLeft-=Agility;
+						if(begin == false)
+						document.getElementById("ball").style.pixelLeft-=Agility;
+					}
+					break;
+				case right:
+					if(document.getElementById("baffle").style.pixelLeft<=908-length+74)
+					{
+						document.getElementById("baffle").style.pixelLeft+=Agility;
+						if(begin == false)
+						document.getElementById("ball").style.pixelLeft+=Agility;
+					}
+					break;
+				case Go:
+					if(begin == false)//判断球是否在运动中
+					{
+						begin = true;//球开始运动
+						move2();
+					}
+					break;
+			}
+		}
+	}
+	document.onkeypress=move;
+	
+	var x=true;
+	var y=false;
+	function move2()//球的移动
+	{
+		//判断是否赢了
+		var temp =0;//用于记录存在的砖块个数
+		for(var i = 1;i <= 34;i++)
+		{
+			if(document.getElementById("div"+i).style.display != "none")//判断是否存在显示的砖块
+				temp++;
+		}
+		if(temp == 0)//砖块没有时游戏结束
+		{
+			alert("你赢了!");
+			return;
+		}
+		
+		//球左右反弹代码	
+		if(document.getElementById("ball").style.pixelLeft<=0)//判断是否到了最左边
+			x=true;
+		if(document.getElementById("ball").style.pixelLeft>= 928+39)//判断是否到了最右边
+			x=false;
+		document.getElementById("ball").style.pixelLeft += x?Rapidity:-Rapidity;
+		
+		//球上下反弹代码
+		if(document.getElementById("ball").style.pixelTop<=0)//判断是否到了顶端
+			y=true;
+		if(document.getElementById("ball").style.pixelTop > 525)//到弹板时的高度
+		{
+			if(document.getElementById("ball").style.pixelLeft >= document.getElementById("baffle").style.pixelLeft && document.getElementById("ball").style.pixelLeft <=		                 document.getElementById("baffle").style.pixelLeft+length )
+			y=false;//允许向上反弹
+		}	
+		if(document.getElementById("ball").style.pixelTop>= 559 && y==true)//判断是否到了底部
+		{
+			alert("你输了!!");
+		}
+		else
+		{
+			setTimeout("move2()",1);
+		}
+		
+		//判断是否要碰到砖块了
+		if(document.getElementById("ball").style.pixelTop <=60)
+		{
+			for(var i = 1;i <= 34;i++)
+			{
+				if(document.getElementById("ball").style.pixelLeft >= document.getElementById("div"+i).style.pixelLeft && document.getElementById("ball").style.		                     pixelLeft <= document.getElementById("div"+i).style.pixelLeft+35 && document.getElementById("div"+i).style.display != "none" && document.																			                     getElementById("ball").style.pixelTop-10 < document.getElementById("div"+i).style.pixelTop+6)//碰到砖块时代码
+				{
+					document.getElementById("div"+i).style.display = "none"
+					y = true;
+				}
+			}
+		}
+		document.getElementById("ball").style.pixelTop += y?Rapidity:-Rapidity;
+	}
+</script>
+
+</head>
+
+<body bgcolor="#CCCCCC">
+	<div id="div1"style="position:absolute;width:58px;height:30px;z-index:1;left:0px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div2"style="position:absolute;width:58px;height:30px;z-index:1;left:58px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div3"style="position:absolute;width:58px;height:30px;z-index:1;left:116px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div4"style="position:absolute;width:58px;height:30px;z-index:1;left:174px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div5"style="position:absolute;width:58px;height:30px;z-index:1;left:232px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div6"style="position:absolute;width:58px;height:30px;z-index:1;left:290px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div7"style="position:absolute;width:58px;height:30px;z-index:1;left:348px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div8"style="position:absolute;width:58px;height:30px;z-index:1;left:406px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div9"style="position:absolute;width:58px;height:30px;z-index:1;left:464px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div10"style="position:absolute;width:58px;height:30px;z-index:1;left:522px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div11"style="position:absolute;width:58px;height:30px;z-index:1;left:580px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div12"style="position:absolute;width:58px;height:30px;z-index:1;left:638px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div13"style="position:absolute;width:58px;height:30px;z-index:1;left:696px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div14"style="position:absolute;width:58px;height:30px;z-index:1;left:754px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div15"style="position:absolute;width:58px;height:30px;z-index:1;left:812px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div16"style="position:absolute;width:58px;height:30px;z-index:1;left:870px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div17"style="position:absolute;width:58px;height:30px;z-index:1;left:928px;top:0px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div18"style="position:absolute;width:58px;height:30px;z-index:1;left:0px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div19"style="position:absolute;width:58px;height:30px;z-index:1;left:58px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div20"style="position:absolute;width:58px;height:30px;z-index:1;left:116px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div21"style="position:absolute;width:58px;height:30px;z-index:1;left:174px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div22"style="position:absolute;width:58px;height:30px;z-index:1;left:232px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div23"style="position:absolute;width:58px;height:30px;z-index:1;left:290px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div24"style="position:absolute;width:58px;height:30px;z-index:1;left:348px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div25"style="position:absolute;width:58px;height:30px;z-index:1;left:406px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div26"style="position:absolute;width:58px;height:30px;z-index:1;left:464px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div27"style="position:absolute;width:58px;height:30px;z-index:1;left:522px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div28"style="position:absolute;width:58px;height:30px;z-index:1;left:580px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div29"style="position:absolute;width:58px;height:30px;z-index:1;left:638px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div30"style="position:absolute;width:58px;height:30px;z-index:1;left:696px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div31"style="position:absolute;width:58px;height:30px;z-index:1;left:754px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div32"style="position:absolute;width:58px;height:30px;z-index:1;left:812px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div33"style="position:absolute;width:58px;height:30px;z-index:1;left:870px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+    <div id="div34"style="position:absolute;width:58px;height:30px;z-index:1;left:928px;top:30px;"><img src="images/1.jpg" width="58" height="30" /></div>
+	<div id="baffle" style="position:absolute; top:560px; left:788px; width:121px; height:16; z-index:2;"><img src="images/bg1.gif" width="194" height="16" id="pix" /></div>
+<div id="ball" style="position:absolute;left:867px;top:522px;width:39;height:37;z-index:3;"><img src="images/ball.gif" width="39" height="37" /></div>
+    <div id="shiZhe" style="position:absolute; left:396px; top:180px; width:338px; height:144px; z-index:4;">
+      <table width="342" border="4" cellpadding="0" cellspacing="0" style="border-color:#B38C66">
+        <tr>
+          <td width="332">
+<table width="332" height="169" border="0" bgcolor="#FFFFFF">
+        <tr>
+          <td height="30" colspan="4">游戏设置</td>
+        </tr>
+        <tr>
+          <td width="80">左键:</td>
+          <td width="60"><input name="txtLeft" type="text" id="txtLeft" value="a" size="1" maxlength="1" width="30" height="20px" /></td>
+          <td width="116">右键:          </td>
+          <td width="58"><input name="txtRight" type="text" id="txtRight" value="d" size="1" maxlength="1" width="30" height="20px" /></td>
+        </tr>
+        <tr>
+          <td>发球键:</td>
+          <td><input name="txtGo" type="text" id="txtGo" value="b" size="1" maxlength="1" width="30" height="20px" /></td>
+          <td>挡板移动敏捷:          </td>
+          <td><input name="txtAgility" type="text" id="txtAgility" value="50" size="1" maxlength="3" width="30" height="20px" /></td>
+        </tr>
+        <tr>
+          <td>弹珠速度: </td>
+          <td><input name="txtRapidity" type="text" id="txtRapidity" value="5" size="1" maxlength="1" width="30" height="20px" /></td>
+          <td>挡扳长度</td>
+          <td><input name="txtLength" type="text" id="txtLength" value="194" size="1" maxlength="3" width="30" height="20px" /></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td height="29">&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><input name="btnOK" type="button" id="btnOK" style="background-image:url(images/bg1.gif); width:60px; height:27px" value="确定" onClick="arranged()" /></td>
+        </tr>
+      </table>
+		  </td>
+        </tr>
+      </table>
+</div>
+</body>
+</html>
