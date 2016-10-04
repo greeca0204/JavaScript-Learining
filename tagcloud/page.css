@@ -1,0 +1,16 @@
+ @charset "gb2312";
+/* CSS Document */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,table,th,td,button{padding:0;margin:0;}
+fieldset,img,button{border:0;}
+table{border-collapse:collapse;border-spacing:0;}
+ol,ul{list-style:none;}
+caption,th,li,dt,dd,p{text-align:left;}
+h1,h2,h3,h4,h5,h6{font-size:100%;text-align:left;}
+q:before,q:after{content:'';}
+abbr,acronym{border:0;}
+.clear{ height:0px; width:0px; line-height:0px; font-size:0px; margin:0px; padding:0px; clear:both;}
+button{ cursor:pointer;}
+
+.tagcloud{width:240px;height:300px;position:relative; margin:20px auto;overflow:hidden; border:1px solid #dcdcdc;}
+/**.tagcloud ul{height:150px;padding-top:150px; overflow:hidden;}**/
+.tagcloud a {float:left;position:absolute;top:0px;left:0px;color:#000;font-weight:bold;text-decoration:none;}

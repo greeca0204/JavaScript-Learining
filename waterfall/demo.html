@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>瀑布流</title>
+
+<script type="text/javascript" language="javascript" src="js/jquery.min.js"></script>
+<script> 
+function click(e) {
+if (document.all) {
+if (event.button==2||event.button==3) { alert("别打算抄代码！");
+oncontextmenu='return false';
+}
+}
+if (document.layers) {
+if (e.which == 3) {
+oncontextmenu='return false';
+}
+}
+}
+if (document.layers) {
+document.captureEvents(Event.MOUSEDOWN);
+}
+document.onmousedown=click;
+document.oncontextmenu = new Function("return false;")
+document.onkeydown =document.onkeyup = document.onkeypress=function(){ 
+if(window.event.keyCode == 123) { 
+window.event.returnValue=false;
+return(false); 
+} 
+}
+</script> 
+<link type="text/css" rel="stylesheet" href="css/waterfall.css" />
+<script type="text/javascript" language="javascript" src="js/waterfall.js"></script>
+
+</head>
+
+<body>
+
+	<ul id="stage">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+
+</body>
+</html>
+
+

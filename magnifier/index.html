@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <style>
+        * {
+            margin:0;
+            padding: 0;
+        }
+        #div1 {
+            margin: 0 auto;
+            width: 420px;
+            height: 210px;
+            overflow: hidden;
+        }
+        .small_png {
+            width: 200px;
+            height: 200px;
+            margin: 5px;
+            float: left;
+        }
+        .big_png {
+            margin: 5px;
+            float: left;
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            display: none;
+        }
+        .border {
+            width: 40px;
+            height: 40px;
+            border: 2px solid red;
+            position: absolute;
+            display: none;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        function getByClass (obj,sClass) {
+            var oArr =[];
+            var a =obj.getElementsByTagName('*');
+            for (var i =0;i <a.length; i++){
+                if (a[i].className==sClass) {
+                    oArr.push(a[i]);
+                }
+            }
+            return oArr;
+        }
+        window.onload = function () {
+            var oDiv =document.getElementById('div1');
+            var iSmall =getByClass(oDiv,'small_png')[0];
+            var iBig =getByClass(oDiv,'big_png')[0];
+            var iBorder =getByClass(oDiv,'border')[0];
+            iSmall.onmouseover = function (ev) {
+                iBorder.style.display = 'block';
+                iBig.style.display ='block';
+
+
+            };
+            iSmall.onmouseout = function () {
+                iBorder.style.display = 'none';
+                iBig.style.display ='none';
+            };
+            iSmall.onmousemove = function (ev) {
+                var oEvent =ev || event;
+                iBorder.style.left = oEvent.clientX + 'px';
+                iBorder.style.top = oEvent.clientY + 'px';
+            }
+        }
+
+    </script>
+	<script> 
+		function click(e) {
+		if (document.all) {
+		if (event.button==2||event.button==3) { alert("别打算抄代码！");
+		oncontextmenu='return false';
+		}
+		}
+		if (document.layers) {
+		if (e.which == 3) {
+		oncontextmenu='return false';
+		}
+		}
+		}
+		if (document.layers) {
+		document.captureEvents(Event.MOUSEDOWN);
+		}
+		document.onmousedown=click;
+		document.oncontextmenu = new Function("return false;")
+		document.onkeydown =document.onkeyup = document.onkeypress=function(){ 
+		if(window.event.keyCode == 123) { 
+		window.event.returnValue=false;
+		return(false); 
+		} 
+		}
+		</script>
+</head>
+<body>
+<div id="div1">
+    <div class="small_png">
+        <div class="border">
+
+        </div>
+        <img src="images/small.png">
+    </div>
+    <div class="big_png">
+        <img src="images/big.png">
+    </div>
+</div>
+</body>
+</html>
